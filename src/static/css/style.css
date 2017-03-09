@@ -1,0 +1,14 @@
+html {
+  color: #030303;
+  font: caption;
+  padding-bottom: 2em;
+}
+
+.logo{
+  height: 20px;
+  width: 20px;
+}
+
+.Base{
+  color: blue;
+}
