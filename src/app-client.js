@@ -3,5 +3,6 @@ import ReactDOM from 'react-dom';
 import Index from './components/Index';
 
 window.onload = () => {
+
   ReactDOM.render(<Index/>,document.getElementById('main'));
 };

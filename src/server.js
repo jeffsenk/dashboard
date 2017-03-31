@@ -19,13 +19,18 @@ app.set('views',path.join(__dirname,'views'));
 app.use(Express.static(path.join(__dirname,'static')));
 
 app.get('/',(req,res)=>{ 
-  db.collection('trades').find().toArray(function(err,result){
-    if(err){
-      return console.log(err);
-    }
-    res.render('index.ejs',{trades: result})
-  })
+    //maybe only initial render here, other updates from client side?
+    //in react class: componentDidMount() and setState()
+    res.render('index.ejs')
 });
+
+app.get('/trades',function(req,res){
+  db.collection('trades').find().toArray(function(err,result){
+    if(err){return console.log(err);}
+    res.send({result}); 
+  });
+});
+
 
 app.post('/trades',function(req,res){
   db.collection('trades').save(req.body,function(err,result){
