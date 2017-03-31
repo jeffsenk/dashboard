@@ -6,7 +6,7 @@ import InputBar from './InputBar';
 export default class FilterTable extends React.Component{
   render(){
     return(
-      <div>
+      <div className={this.props.style}>
         <SearchBar/>
         <TradeTable trades={this.props.trades}/>
         <InputBar/>

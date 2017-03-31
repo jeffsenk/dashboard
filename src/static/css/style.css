@@ -9,6 +9,10 @@ html {
   width: 20px;
 }
 
-.Base{
+.TradeTable{
   color: blue;
+}
+
+.FilterTable{
+  font-family: Monospace;
 }

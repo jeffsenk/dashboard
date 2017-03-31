@@ -12,7 +12,7 @@ export default class TradeTable extends React.Component{
     });
 
    return(
-      <div className='Base'>
+      <div className='TradeTable'>
 	 <table>
 	    <tbody>{rows}</tbody>
 	 </table>

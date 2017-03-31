@@ -3,8 +3,9 @@ import FilterTable from './FilterTable';
 
 export default class Index extends React.Component {
   render(){
+
     return (
-      <div className="home">
+      <div>
         <FilterTable trades={this.props.trades}/>
       </div>
     );
