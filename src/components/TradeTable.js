@@ -13,9 +13,6 @@ export default class TradeTable extends React.Component{
 
    return(
       <div className='Base'>
-         <div>
-           Some boilerplate
-         </div>
 	 <table>
 	    <tbody>{rows}</tbody>
 	 </table>
