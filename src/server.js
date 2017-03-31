@@ -19,8 +19,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(Express.static(path.join(__dirname,'static')));
 
 app.get('/',(req,res)=>{ 
-    //maybe only initial render here, other updates from client side?
-    //in react class: componentDidMount() and setState()
+    //initial render only
     res.render('index.ejs')
 });
 

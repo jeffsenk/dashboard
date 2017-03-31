@@ -1,11 +1,11 @@
 import React from 'react';
-import Base from './Base';
+import TradeTable from './TradeTable';
 
 export default class Index extends React.Component {
   render(){
     return (
       <div className="home">
-        <Base/>
+        <TradeTable trades={this.props.trades}/>
       </div>
     );
   }
