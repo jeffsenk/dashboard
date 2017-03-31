@@ -6,43 +6,44 @@ import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router';
 import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
-
+const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
 const app = new Express();
 const server = new Server(app);
+var db;
+
+app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
 app.use(Express.static(path.join(__dirname,'static')));
 
-app.get('*',(req,res)=> {
-  match(
-    {routes, location: req.url},
-    (err,redirectLocation,renderProps) =>{
-      if(err){
-        return res.stats(500).send(err.message);
-      }
-      if (redirectLocation){
-        return res.redirect(302,redirectLocation.pathname + redirectLocation.search);
-      }
-      let markup;
-      if (renderProps){
-        markup = renderToString(<RouterContext {...renderProps}/>);
-      }else{
-        markup = renderToString(<NotFoundPage/>);
-        res.status(404);
-      }
-      return res.render('index',{markup});
+app.get('/',(req,res)=>{ 
+  db.collection('trades').find().toArray(function(err,result){
+    if(err){
+      return console.log(err);
     }
-  );
+    res.render('index.ejs',{trades: result})
+  })
 });
 
-const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV || 'production';
-server.listen(port, err=> {
+app.post('/trades',function(req,res){
+  db.collection('trades').save(req.body,function(err,result){
+    if(err){
+      return console.log(err);
+    }
+    console.log('new db entry saved');
+    res.redirect('/');
+  });
+});
+
+MongoClient.connect('mongodb://jeffsenk:NewYork1234@ds145800.mlab.com:45800/capture',function(err,database){
   if(err){
-    return console.error(err);
+    return console.log(err);
   }
-
-  console.info('Server running on http://localhost:3000 production');
-
+  db = database;  
+  app.listen(3000,function(){
+    console.log('listening on port 3000');
+  });
 });
+
