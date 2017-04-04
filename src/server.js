@@ -10,7 +10,11 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = new Express();
 const server = new Server(app);
+const http = require('https');
 var db;
+const quandl = "www.quandl.com";
+const api_key = "CzvmZAGey2ZUu-EG5Jze";
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine','ejs');
@@ -22,6 +26,31 @@ app.get('/',(req,res)=>{
     //initial render only
     res.render('index.ejs')
 });
+
+function getRemote(options,res){
+  http.get(options,function(api_res){
+    var data ="";
+    api_res.on('data',function(chunk){
+      data += chunk;
+    });
+
+    api_res.on('end',function(){
+      var json_data = JSON.parse(data);
+      res.send(json_data.dataset.data[0]);
+    });
+  }).on('error',function(err){
+    console.log(err);
+  });
+};
+
+app.get('/rhodium',function(req,res){
+  var options ={
+    host: quandl,
+    path: "/api/v3/datasets/JOHNMATT/RHOD.json?limit=1"+api_key
+  };
+  getRemote(options,res);
+});
+
 
 app.get('/trades',function(req,res){
   db.collection('trades').find().toArray(function(err,result){
