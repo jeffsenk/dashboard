@@ -35,6 +35,7 @@ function getRemote(options,res){
     });
 
     api_res.on('end',function(){
+      console.log(data)
       var json_data = JSON.parse(data);
       res.send(json_data.dataset.data[0]);
     });

@@ -15,7 +15,9 @@ export default class Index extends React.Component {
     }
     const pbStyle = {
       height:'150px',
-      backgroundColor:'#bccad6'
+      borderBottomStyle:'solid',
+      borderBottomWidth: '1px',
+      borderBottomColor: 'lightGrey'
     }
 
     return (
