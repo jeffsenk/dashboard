@@ -1,29 +1,37 @@
 import React from 'react';
-import FilterTable from './FilterTable';
-import axios from 'axios';
+import PriceBox from './PriceBox'
+import NavBar from './NavBar'
+import FocusBox from './FocusBox'
 
 export default class Index extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      price : 0
-    }
-  }
-
-  componentDidMount(){
-    axios.get('/trades').then(function(data){
-      console.log(data);
-      this.setState({
-        price : data.data.result[0].price
-      });
-      console.log(this.state.price);
-    }.bind(this));
-  }
-
   render(){
+
+    const style = {
+      fontSize: 'x-large',
+      fontFamily: 'Arial',
+    }
+    const bodyStyle ={
+      marginTop: '70px'
+    }
+    const pbStyle = {
+      height:'150px',
+      backgroundColor:'#bccad6'
+    }
+
     return (
-      <div>
-	{this.state.price}
+      <div style={style}>
+        <NavBar title='Techemet'/>
+        <div style={bodyStyle}>
+          <div style={pbStyle}>
+	    <PriceBox title='RH' product='/rhodium'/>
+	    <PriceBox title='PL' product='/platinum'/>
+	    <PriceBox title='PA' product='/palladium'/>
+	    <PriceBox title='RU' product='/ruthenium'/>
+	    <PriceBox title='IR' product='/iridium'/>
+          </div>
+          <div>
+          </div>
+        </div>
       </div>
     );
   };
