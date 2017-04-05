@@ -15,7 +15,6 @@ var db;
 const quandl = "www.quandl.com";
 const api_key = "CzvmZAGey2ZUu-EG5Jze";
 
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -43,6 +42,33 @@ function getRemote(options,res){
     console.log(err);
   });
 };
+
+app.get('/aluminum',function(req,res){
+  var product_path = "/api/v3/datasets/LME/PR_AL.json?limit=1&api_key="+api_key;
+  var options={
+    host: quandl,
+    path: product_path
+  };
+  getRemote(options,res);
+});
+
+app.get('/nickel',function(req,res){
+  var product_path = "/api/v3/datasets/LME/PR_NI.json?limit=1&api_key="+api_key;
+  var options={
+    host: quandl,
+    path: product_path
+  };
+  getRemote(options,res);
+});
+
+app.get('/copper',function(req,res){
+  var product_path = "/api/v3/datasets/LME/PR_CU.json?limit=1&api_key="+api_key;
+  var options={
+    host: quandl,
+    path: product_path
+  };
+  getRemote(options,res);
+});
 
 app.get('/rhodium',function(req,res){
   var product_path = "/api/v3/datasets/JOHNMATT/RHOD.json?limit=1&api_key="+api_key;

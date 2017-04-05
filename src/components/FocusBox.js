@@ -21,7 +21,7 @@ export default class PriceBox extends React.Component {
 
   render(){
     const style = {
-      width:'30%',
+      width:'100%',
       height:'400px',
       borderStyle:'solid',
       borderWidth:'1px',
@@ -45,15 +45,23 @@ export default class PriceBox extends React.Component {
     const tdStyle={
       height: '50%' 
     }
+    const hrefStyle={
+      display:"block",
+      textAlign:"center"
+    }
+    const imgStyle={
+      maxWidth:"100%",
+      width:"600px"
+    }
 
     return (
       <div style={style}>
-        <table style={tStyle}>
-          <tr style={trStyle}>
-            <td style={tdStyle}>{this.props.title}:</td>
-            <td style={tdStyle}>{this.state.price}</td>
-          </tr>
-        </table>
+        <div>
+          <a href="https://plot.ly/~jeffsenk/5/?share_key=hOrVgKsqWxAawIztyY1b1N" target="_blank" title="platinum" style={hrefStyle}>
+            <img src="https://plot.ly/~jeffsenk/5.png?share_key=hOrVgKsqWxAawIztyY1b1N" alt="platinum" style={imgStyle} onerror="this.onerror=null;this.src='https://plot.ly/404.png';" />
+          </a>
+          <script data-plotly="jeffsenk:5" sharekey-plotly="hOrVgKsqWxAawIztyY1b1N" src="https://plot.ly/embed.js" async></script>      
+        </div>
       </div>
     );
   };

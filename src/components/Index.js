@@ -25,13 +25,14 @@ export default class Index extends React.Component {
         <NavBar title='Techemet'/>
         <div style={bodyStyle}>
           <div style={pbStyle}>
-	    <PriceBox title='RH' product='/rhodium'/>
-	    <PriceBox title='PL' product='/platinum'/>
-	    <PriceBox title='PA' product='/palladium'/>
+	    <PriceBox title='CP' product='/copper'/>
+	    <PriceBox title='AL' product='/aluminum'/>
+	    <PriceBox title='NI' product='/nickel'/>
 	    <PriceBox title='RU' product='/ruthenium'/>
 	    <PriceBox title='IR' product='/iridium'/>
           </div>
           <div>
+            <FocusBox title='PL' product='/platinum'/>
           </div>
         </div>
       </div>
