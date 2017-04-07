@@ -26,6 +26,7 @@
     "ejs": "^2.5.1",
     "express": "^4.14.0",
     "mongodb": "^2.2.25",
+    "plotly": "^1.0.6",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.6.1"

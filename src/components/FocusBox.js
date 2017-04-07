@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Plot from './Plot';
 
 export default class PriceBox extends React.Component {
   constructor(props){
@@ -35,16 +36,6 @@ export default class PriceBox extends React.Component {
       marginLeft: '10px'
     }
 
-    const tStyle={
-      width: '100%',
-      height: '100%'
-    }
-    const trStyle={
-      height: '100%'
-    }
-    const tdStyle={
-      height: '50%' 
-    }
     const hrefStyle={
       display:"block",
       textAlign:"center"
@@ -57,10 +48,7 @@ export default class PriceBox extends React.Component {
     return (
       <div style={style}>
         <div>
-          <a href="https://plot.ly/~jeffsenk/5/?share_key=hOrVgKsqWxAawIztyY1b1N" target="_blank" title="platinum" style={hrefStyle}>
-            <img src="https://plot.ly/~jeffsenk/5.png?share_key=hOrVgKsqWxAawIztyY1b1N" alt="platinum" style={imgStyle} onerror="this.onerror=null;this.src='https://plot.ly/404.png';" />
-          </a>
-          <script data-plotly="jeffsenk:5" sharekey-plotly="hOrVgKsqWxAawIztyY1b1N" src="https://plot.ly/embed.js" async></script>      
+          <Plot/>
         </div>
       </div>
     );
