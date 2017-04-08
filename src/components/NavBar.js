@@ -11,7 +11,8 @@ class NavBar extends React.Component{
       borderBottomStyle: "solid",
       borderBottomWidth: "1px",
       zIndex:"1",
-      marginBottom:"10px"
+      marginBottom:"10px",
+      backgroundColor: "white"
     }
     return(
       <div style={style}>

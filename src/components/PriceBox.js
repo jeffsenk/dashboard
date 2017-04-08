@@ -11,11 +11,9 @@ export default class PriceBox extends React.Component {
 
   componentDidMount(){
     axios.get(this.props.product).then(function(res){
-      console.log(res);
       this.setState({
         price : res.data[3]
       });
-      console.log(this.state.price);
     }.bind(this));
   }
 
@@ -32,7 +30,8 @@ export default class PriceBox extends React.Component {
       display: 'inline-block',
       marginRight: '10px',
       marginTop: '25px',
-      marginLeft: '10px'
+      marginLeft: '10px',
+      marginBottom: '20px'
     }
 
     const tStyle={
@@ -45,6 +44,11 @@ export default class PriceBox extends React.Component {
     const tdStyle={
       height: '50%' 
     }
+    const citeStyle={
+      fontSize: 'small',
+      color: 'grey',
+      paddingBottom: '10px'
+    }
 
     return (
       <div style={style}>
@@ -54,6 +58,7 @@ export default class PriceBox extends React.Component {
             <td style={tdStyle}>{this.state.price}</td>
           </tr>
         </table>
+        <div style={citeStyle}>{this.props.cite}</div>
       </div>
     );
   };

@@ -14,6 +14,7 @@ const http = require('https');
 var db;
 const quandl = "www.quandl.com";
 const api_key = "CzvmZAGey2ZUu-EG5Jze";
+const delay = Number(3000);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine','ejs');
@@ -43,13 +44,32 @@ function getRemote(options,res){
   });
 };
 
+function getRemoteArray(options,res){
+  http.get(options,function(api_res){
+    var data ="";
+    api_res.on('data',function(chunk){
+      data += chunk;
+    });
+
+    api_res.on('end',function(){
+      console.log(data)
+      var json_data = JSON.parse(data);
+      res.send(json_data.dataset.data);
+    });
+  }).on('error',function(err){
+    console.log(err);
+  });
+};
+
 app.get('/aluminum',function(req,res){
   var product_path = "/api/v3/datasets/LME/PR_AL.json?limit=1&api_key="+api_key;
   var options={
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemote(options,res);
+  },delay);
 });
 
 app.get('/nickel',function(req,res){
@@ -58,7 +78,9 @@ app.get('/nickel',function(req,res){
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemote(options,res);
+  },delay);
 });
 
 app.get('/copper',function(req,res){
@@ -67,25 +89,31 @@ app.get('/copper',function(req,res){
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemote(options,res);
+  },delay);
 });
 
 app.get('/rhodium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/RHOD.json?limit=1&api_key="+api_key;
+  var product_path = "/api/v3/datasets/JOHNMATT/RHOD.json?limit=30&api_key="+api_key;
   var options ={
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemoteArray(options,res);
+  },delay);
 });
 
 app.get('/palladium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/PALL.json?limit=1&api_key="+api_key;
+  var product_path = "/api/v3/datasets/JOHNMATT/PALL.json?limit=30&api_key="+api_key;
   var options ={
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemoteArray(options,res);
+  },delay);
 });
 
 app.get('/ruthenium',function(req,res){
@@ -94,7 +122,9 @@ app.get('/ruthenium',function(req,res){
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemote(options,res);
+  },delay);
 });
 
 app.get('/iridium',function(req,res){
@@ -103,16 +133,20 @@ app.get('/iridium',function(req,res){
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemote(options,res);
+  },delay);
 });
 
 app.get('/platinum',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/PLAT.json?limit=1&api_key="+api_key;
+  var product_path = "/api/v3/datasets/JOHNMATT/PLAT.json?limit=30&api_key="+api_key;
   var options ={
     host: quandl,
     path: product_path
   };
-  getRemote(options,res);
+  setTimeout(function(){
+    getRemoteArray(options,res);
+  },delay);
 });
 
 app.get('/trades',function(req,res){

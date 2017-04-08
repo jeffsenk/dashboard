@@ -14,25 +14,31 @@ export default class Index extends React.Component {
       marginTop: '70px'
     }
     const pbStyle = {
-      height:'150px',
+      height:'200px',
       borderBottomStyle:'solid',
       borderBottomWidth: '1px',
-      borderBottomColor: 'lightGrey'
+      borderBottomColor: 'lightGrey',
+      paddingBottom: '20px'
     }
+
+    const lme = 'LME USD/tonne';
+    const jm = 'JM USD/troy oz';
 
     return (
       <div style={style}>
         <NavBar title='Techemet'/>
         <div style={bodyStyle}>
           <div style={pbStyle}>
-	    <PriceBox title='CP' product='/copper'/>
-	    <PriceBox title='AL' product='/aluminum'/>
-	    <PriceBox title='NI' product='/nickel'/>
-	    <PriceBox title='RU' product='/ruthenium'/>
-	    <PriceBox title='IR' product='/iridium'/>
+	    <PriceBox cite={lme} title='CP' product='/copper'/>
+	    <PriceBox cite={lme} title='AL' product='/aluminum'/>
+	    <PriceBox cite={lme} title='NI' product='/nickel'/>
+	    <PriceBox cite={jm} title='RU' product='/ruthenium'/>
+	    <PriceBox cite={jm} title='IR' product='/iridium'/>
           </div>
           <div>
-            <FocusBox title='PL' product='/platinum'/>
+            <FocusBox cite={jm} title='PL' product='/platinum'/>
+            <FocusBox cite={jm} title='PA' product='/palladium'/>
+            <FocusBox cite={jm} title='RO' product='/rhodium'/>
           </div>
         </div>
       </div>

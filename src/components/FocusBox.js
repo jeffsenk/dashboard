@@ -3,27 +3,11 @@ import axios from 'axios';
 import Plot from './Plot';
 
 export default class PriceBox extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      price : 0
-    }
-  }
-
-  componentDidMount(){
-    axios.get(this.props.product).then(function(res){
-      console.log(res);
-      this.setState({
-        price : res.data[3]
-      });
-      console.log(this.state.price);
-    }.bind(this));
-  }
 
   render(){
     const style = {
-      width:'100%',
-      height:'400px',
+      width:'70%',
+      height:'300px',
       borderStyle:'solid',
       borderWidth:'1px',
 //      borderRadius: '5px',
@@ -36,20 +20,18 @@ export default class PriceBox extends React.Component {
       marginLeft: '10px'
     }
 
-    const hrefStyle={
-      display:"block",
-      textAlign:"center"
-    }
-    const imgStyle={
-      maxWidth:"100%",
-      width:"600px"
+    const citeStyle={
+      fontSize : 'small',
+      color: 'grey'
     }
 
     return (
       <div style={style}>
+        <div>{this.props.title}</div>
         <div>
-          <Plot/>
+          <Plot product={this.props.product}/>
         </div>
+        <div style={citeStyle}>{this.props.cite}</div>
       </div>
     );
   };
