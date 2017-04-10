@@ -12,7 +12,6 @@ class Plot extends React.Component{
 
   componentDidMount(){
     axios.get(this.props.product).then(function(res){
-      console.log(res);
       var temp=[];
       for(var i=res.data.length-1;i>=0;i--){
         temp.push({date : res.data[i][0], price: res.data[i][3]});
@@ -20,7 +19,6 @@ class Plot extends React.Component{
       this.setState({
         prices : temp
       });
-      console.log(this.state.price);
     }.bind(this));
   }
 

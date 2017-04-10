@@ -2,11 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import Plot from './Plot';
 
-export default class PriceBox extends React.Component {
+export default class FocusBox extends React.Component {
 
   render(){
     const style = {
-      width:'70%',
+      width:'100%',
       height:'300px',
       borderStyle:'solid',
       borderWidth:'1px',

@@ -11,6 +11,7 @@ const MongoClient = require('mongodb').MongoClient;
 const app = new Express();
 const server = new Server(app);
 const http = require('https');
+import Parser from 'rss-parser';
 var db;
 const quandl = "www.quandl.com";
 const api_key = "CzvmZAGey2ZUu-EG5Jze";
@@ -60,6 +61,13 @@ function getRemoteArray(options,res){
     console.log(err);
   });
 };
+
+app.get('/bullionDesk',function(req,res){
+  Parser.parseURL('https://www.bulliondesk.com/feed/',function(err,parsed){
+    console.log(parsed.feed.title);
+    res.send(parsed.feed);
+  });
+});
 
 app.get('/aluminum',function(req,res){
   var product_path = "/api/v3/datasets/LME/PR_AL.json?limit=1&api_key="+api_key;
