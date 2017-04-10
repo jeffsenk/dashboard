@@ -11,11 +11,18 @@ const MongoClient = require('mongodb').MongoClient;
 const app = new Express();
 const server = new Server(app);
 const http = require('https');
+const request = require('request');
+const throttledRequest = require('throttled-request')(request);
 import Parser from 'rss-parser';
 var db;
-const quandl = "www.quandl.com";
+const quandl = "https://www.quandl.com";
 const api_key = "CzvmZAGey2ZUu-EG5Jze";
 const delay = Number(3000);
+
+throttledRequest.configure({
+  requests: 3,
+  milliseconds: 1000
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine','ejs');
@@ -29,34 +36,23 @@ app.get('/',(req,res)=>{
 });
 
 function getRemote(options,res){
-  http.get(options,function(api_res){
-    var data ="";
-    api_res.on('data',function(chunk){
-      data += chunk;
-    });
-
-    api_res.on('end',function(){
-      console.log(data)
-      var json_data = JSON.parse(data);
-      res.send(json_data.dataset.data[0]);
-    });
+  throttledRequest(options, function(err,api_res,body){
+      if(api_res.statusCode == 200){
+        var data = JSON.parse(body);
+       console.log(data.dataset.database_code,data.dataset.name,new Date());
+        res.send(data.dataset.data[0]);
+      }
   }).on('error',function(err){
     console.log(err);
   });
 };
 
 function getRemoteArray(options,res){
-  http.get(options,function(api_res){
-    var data ="";
-    api_res.on('data',function(chunk){
-      data += chunk;
-    });
-
-    api_res.on('end',function(){
-      console.log(data)
-      var json_data = JSON.parse(data);
-      res.send(json_data.dataset.data);
-    });
+  throttledRequest(options,function(err,api_res,body){
+    if(api_res.statusCode == 200){
+      var data = JSON.parse(body);
+      res.send(data.dataset.data);
+    }
   }).on('error',function(err){
     console.log(err);
   });
@@ -70,91 +66,67 @@ app.get('/bullionDesk',function(req,res){
 });
 
 app.get('/aluminum',function(req,res){
-  var product_path = "/api/v3/datasets/LME/PR_AL.json?limit=1&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/LME/PR_AL.json?limit=1&api_key="+api_key;
   var options={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemote(options,res);
-  },delay);
 });
 
 app.get('/nickel',function(req,res){
-  var product_path = "/api/v3/datasets/LME/PR_NI.json?limit=1&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/LME/PR_NI.json?limit=1&api_key="+api_key;
   var options={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemote(options,res);
-  },delay);
 });
 
 app.get('/copper',function(req,res){
-  var product_path = "/api/v3/datasets/LME/PR_CU.json?limit=1&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/LME/PR_CU.json?limit=1&api_key="+api_key;
   var options={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
-    getRemote(options,res);
-  },delay);
+  getRemote(options,res);
 });
 
 app.get('/rhodium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/RHOD.json?limit=30&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/JOHNMATT/RHOD.json?limit=30&api_key="+api_key;
   var options ={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemoteArray(options,res);
-  },delay);
 });
 
 app.get('/palladium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/PALL.json?limit=30&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/JOHNMATT/PALL.json?limit=30&api_key="+api_key;
   var options ={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemoteArray(options,res);
-  },delay);
 });
 
 app.get('/ruthenium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/RUTH.json?limit=1&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/JOHNMATT/RUTH.json?limit=1&api_key="+api_key;
   var options ={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemote(options,res);
-  },delay);
 });
 
 app.get('/iridium',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/IRID.json?limit=1&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/JOHNMATT/IRID.json?limit=1&api_key="+api_key;
   var options ={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemote(options,res);
-  },delay);
 });
 
 app.get('/platinum',function(req,res){
-  var product_path = "/api/v3/datasets/JOHNMATT/PLAT.json?limit=30&api_key="+api_key;
+  var product_path = quandl+"/api/v3/datasets/JOHNMATT/PLAT.json?limit=30&api_key="+api_key;
   var options ={
-    host: quandl,
-    path: product_path
+    url: product_path
   };
-  setTimeout(function(){
     getRemoteArray(options,res);
-  },delay);
 });
 
 app.get('/trades',function(req,res){
