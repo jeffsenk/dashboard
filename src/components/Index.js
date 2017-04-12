@@ -3,6 +3,7 @@ import PriceBox from './PriceBox'
 import NavBar from './NavBar'
 import FocusBox from './FocusBox'
 import RssBox from './RssBox'
+import DBbox from './DBbox'
 
 export default class Index extends React.Component {
   render(){
@@ -44,7 +45,7 @@ export default class Index extends React.Component {
 	    <PriceBox cite={lme} title='AL' product='/aluminum'/>
 	    <PriceBox cite={lme} title='NI' product='/nickel'/>
 	    <PriceBox cite={jm} title='RU' product='/ruthenium'/>
-	    <PriceBox cite={jm} title='IR' product='/iridium'/>
+	    <DBbox cite={lme} title='Scrap Steel' product='/steel'/>
           </div>
           <div style={fbStyle}>
             <FocusBox cite={jm} title='PL' product='/platinum'/>
