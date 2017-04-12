@@ -5,6 +5,7 @@ export default class RssBox extends React.Component {
   constructor(props){
     super(props);
     this.state ={
+      title: "",
       data: []
     }
   }
@@ -12,6 +13,7 @@ export default class RssBox extends React.Component {
   componentDidMount(){
     axios.get(this.props.feed).then(function(res){
       this.setState({
+        title: res.data.title,
         data: res.data.entries
       });
     }.bind(this));
@@ -35,17 +37,22 @@ export default class RssBox extends React.Component {
       marginLeft: '10px'
     }
 
-    console.log(this.state)
+    const dateStyle={
+      fontSize:'smaller',
+      color: 'grey'
+    }
 
     if(this.state.data.length >0){
       const list = this.state.data.map((item) =>
         <li> 
           <a href={item.link}>{item.title}</a>
+          <div style={dateStyle}>{item.pubDate}</div>
         </li>
       );
 
       return (
         <div style={style}>
+          <div>{this.state.title}</div>
           <ul>{list}</ul>
         </div>
       )

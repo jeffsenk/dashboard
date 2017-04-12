@@ -5,15 +5,16 @@ export default class DBBox extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      price : 0
+      price : 0,
+      date: ""
     }
   }
 
   componentDidMount(){
     axios.get(this.props.product).then(function(res){
-    console.log(res);
       this.setState({
-        price : res.data.result[0].price
+        price : res.data.result[0].price,
+        date: res.data.result[0].date
       });
     }.bind(this));
   }
@@ -32,7 +33,8 @@ export default class DBBox extends React.Component {
       marginRight: '10px',
       marginTop: '25px',
       marginLeft: '10px',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      verticalAlign: 'top'
     }
 
     const tStyle={
@@ -59,7 +61,7 @@ export default class DBBox extends React.Component {
             <td style={tdStyle}>{this.state.price}</td>
           </tr>
         </table>
-        <div style={citeStyle}>{this.props.cite}</div>
+        <div style={citeStyle}>{this.props.cite} {this.state.date}</div>
       </div>
     );
   };

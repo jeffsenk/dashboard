@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = new Express();
 const server = new Server(app);
-const http = require('https');
 const request = require('request');
 const throttledRequest = require('throttled-request')(request);
 import Parser from 'rss-parser';
@@ -136,6 +135,18 @@ app.get('/trades',function(req,res){
   });
 });
 
+app.get('/commentary',function(req,res){
+  db.collection('commentary').find().toArray(function(err,result){
+    res.send({result});
+  });
+});
+
+app.get('/steel',function(req,res){
+  db.collection('steel').find().toArray(function(err,result){
+    console.log(result);
+    res.send({result});
+  });
+});
 
 app.post('/trades',function(req,res){
   db.collection('trades').save(req.body,function(err,result){

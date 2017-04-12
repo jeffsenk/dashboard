@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import FocusBox from './FocusBox'
 import RssBox from './RssBox'
 import DBbox from './DBbox'
+import CommentaryBox from './CommentaryBox'
 
 export default class Index extends React.Component {
   render(){
@@ -20,7 +21,9 @@ export default class Index extends React.Component {
       borderBottomStyle:'solid',
       borderBottomWidth: '1px',
       borderBottomColor: 'lightGrey',
-      paddingBottom: '20px'
+      paddingTop: '20px',
+      verticalAlgin: 'top'
+//      paddingBottom: '20px'
     }
     const fbStyle ={
       width: '65%',
@@ -31,6 +34,10 @@ export default class Index extends React.Component {
       verticalAlign: 'top',
       width: '30%',
       display: 'inline-block'
+    }
+    const commentStyle ={
+      width: '100%',
+      display: 'inline-block',
     }
   
     const lme = 'LME USD/tonne';
@@ -54,6 +61,9 @@ export default class Index extends React.Component {
           </div>
           <div style={rssStyle}>
             <RssBox feed='bullionDesk'/>
+          </div>
+          <div style={commentStyle}>
+            <CommentaryBox source='commentary'/>
           </div>
         </div>
       </div>

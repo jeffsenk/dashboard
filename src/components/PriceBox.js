@@ -31,7 +31,8 @@ export default class PriceBox extends React.Component {
       marginRight: '10px',
       marginTop: '25px',
       marginLeft: '10px',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      verticalAlign: 'top'
     }
 
     const tStyle={
