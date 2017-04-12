@@ -13,8 +13,8 @@ export default class DBBox extends React.Component {
   componentDidMount(){
     axios.get(this.props.product).then(function(res){
       this.setState({
-        price : res.data.result[0].price,
-        date: res.data.result[0].date
+        price : res.data.result[res.data.result.length-1].price,
+        date: res.data.result[res.data.result.length-1].date
       });
     }.bind(this));
   }
