@@ -163,8 +163,8 @@ MongoClient.connect('mongodb://jeffsenk:NewYork1234@ds145800.mlab.com:45800/capt
     return console.log(err);
   }
   db = database;  
-  app.listen(3000,function(){
-    console.log('listening on port 3000');
+  app.listen(80,function(){
+    console.log('listening on port 80');
   });
 });
 

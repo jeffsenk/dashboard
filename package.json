@@ -31,6 +31,7 @@
     "react-router": "^2.6.1",
     "recharts": "^0.22.0",
     "request": "^2.81.0",
+    "rss-parser": "^2.6.1",
     "throttled-request": "^0.1.1"
   },
   "devDependencies": {
